@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="classic_store_layout" inherit_id="website.layout"
+              name="Footer Sample">
+        <!-- The template inherits from "website.layout" and replaces the existing footer with a custom footer design that
+        includes a logo, site pages and admin pages links, mobile app links, and social media links. The template also
+        removes the default copyright information. -->
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer">
+                <div class="footer_content">
+                    <section class="footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="footer_logo">
+                                        <a class="navbar-brand waves-effect"
+                                           href="/">CLASSIC
+                                            <span>STORE</span>
+                                        </a>
+                                        <p>
+                                            Lorem ipsum dolor sit amet,
+                                            consectetur adipisicing elit, sed do
+                                            eiusmod
+                                            tempor incididunt
+                                            ut labore et dolore magna aliqua.
+                                            Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris
+                                            nisi ut
+                                            aliquip ex ea
+                                            commodo consequat.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 offset-lg-1 offset-md-2 col-md-4">
+                                    <div class="pages">
+                                        <h4>Site Pages</h4>
+                                        <div class="links">
+                                            <a href="/">Home</a>
+                                            <a href="/shop">Shop</a>
+                                            <a href="/contactus">Contact Us</a>
+                                            <a href="#">Article &amp; Tips</a>
+                                            <a href="#">Terms &amp; Conditions
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="pages">
+                                        <h4>Admin Pages</h4>
+                                        <div class="links">
+                                            <a href="#">Category</a>
+                                            <a href="#">Single Page</a>
+                                            <a href="#">Store Single</a>
+                                            <a href="#">Single Post</a>
+                                            <a href="#">Blog</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="apps">
+                                        <div class="mob_img">
+                                            <div class="mob_icon">
+                                                <img src="/theme_classic_store/static/src/images/footer/phone-icon.png"/>
+                                            </div>
+                                            <p>
+                                                Get the Dealsy Mobile App and
+                                                Save more
+                                            </p>
+                                        </div>
+                                        <div class="buttons">
+                                            <div class="wrapper_img">
+                                                <a href="#">
+                                                    <img src="/theme_classic_store/static/src/images/apps/apple-app-store.png"/>
+                                                </a>
+                                            </div>
+                                            <div class="wrapper_img">
+                                                <a href="#">
+                                                    <img src="/theme_classic_store/static/src/images/apps/google-play-store.png"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer_bottom">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bottom_left">
+                                            Copyright © 2020. All Rights
+                                            Reserved, theme by
+                                            <a href="#">
+                                                Cybrosys.com
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bottom-right">
+                                            <ul class="d-flex">
+                                                <a href="#">
+                                                    <li class="fa fa-facebook"/>
+                                                </a>
+                                                <a href="#">
+                                                    <li class="fa fa-twitter"/>
+                                                </a>
+                                                <a href="#">
+                                                    <li class="fa fa-pinterest"/>
+                                                </a>
+                                                <a href="#">
+                                                    <li class="fa fa-vimeo"/>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='o_footer_copyright o_colored_level o_cc']"
+               position="replace">
+        </xpath>
+    </template>
+    <template id="submenu" name="Submenu">
+        <!-- The above code defines a template for rendering a submenu item in a website's navigation menu.
+        The submenu item can either be a regular dropdown or a mega menu. -->
+        <t t-set="has_visible_submenu"
+           t-value="(submenu.is_mega_menu and submenu.is_visible) or submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
+        <li t-if="submenu.is_visible and not has_visible_submenu"
+            t-attf-class="#{item_class or ''}">
+            <a t-att-href="submenu.clean_url()"
+               t-attf-class="#{link_class or ''} #{'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
+               role="menuitem"
+               t-ignore="true"
+               t-att-target="'_blank' if submenu.new_window else None">
+                <span t-field="submenu.name" id="arrow"/>
+            </a>
+        </li>
+        <li t-if="has_visible_submenu" t-attf-class="#{item_class or ''} dropdown #{
+                (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+                 (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+                } #{submenu.is_mega_menu and 'position-static'}">
+            <a t-attf-class="#{link_class or ''} dropdown-toggle #{submenu.is_mega_menu and 'o_mega_menu_toggle'}"
+               data-toggle="dropdown" href="#">
+                <span t-field="submenu.name" id="arrow"/>
+            </a>
+            <div t-if="submenu.is_mega_menu"
+                 t-attf-class="dropdown-menu o_mega_menu #{submenu.mega_menu_classes}"
+                 data-name="Mega Menu"
+                 t-field="submenu.mega_menu_content"/>
+            <ul t-else="" class="dropdown-menu" role="menu">
+                <t t-foreach="submenu.child_id" t-as="submenu">
+                    <t t-call="website.submenu">
+                        <t t-set="item_class" t-value="None"/>
+                        <t t-set="link_class" t-value="'dropdown-item'"/>
+                    </t>
+                </t>
+            </ul>
+        </li>
+    </template>
+</odoo>

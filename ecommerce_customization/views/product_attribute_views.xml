@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 	<record id="product_attribute_view_form_inherit_advance" model="ir.ui.view">
+        <field name="name">product.attribute.form.advance</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <field name="create_variant" position="after">
+                <field name="is_use_in_search"/>
+                <field name="is_use_in_compare"/>
+                <field name="is_use_in_filter"/>
+                <field name="priority_sequence"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="attribute_tree_view_inherit_advance" model="ir.ui.view">
+        <field name="name">product.attribute.tree.advance</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.attribute_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="create_variant" position="after">
+                <field name="is_use_in_search"/>
+                <field name="is_use_in_compare"/>
+                <field name="is_use_in_filter"/>
+                <field name="priority_sequence"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_compare_inherit_advance" inherit_id="website_sale_comparison.product_compare">
+        <xpath expr="//tr[@t-foreach='categories[category]']" position="replace">
+            <tr t-foreach="categories[category]" t-as="attribute" t-att-class="'collapse show o_ws_category_%d' % category.id" t-if="attribute.is_use_in_compare">
+                <td><span t-field="attribute.name"/></td>
+                <td t-foreach="categories[category][attribute]" t-as="product">
+                    <t t-foreach="categories[category][attribute][product]" t-as="ptav">
+                        <span t-field="ptav.name"/><t t-if="not ptav_last">, </t>
+                    </t>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>
