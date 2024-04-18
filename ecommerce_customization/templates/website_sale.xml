@@ -54,8 +54,20 @@
                 </div>
             </div>
             
-        </xp/oath>
+        </xpath>
+        <xpath expr="//t[@t-call='website_sale.product_price']" position="after">
+            <t t-set="combination_info" t-value="product._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+            <div class="row">
+                <t t-if="combination_info['product_quant']">
+                    <u><i><t t-esc="combination_info['product_quant']"/> Unit(s) left</i></u>
+                </t>
+                <t t-if="product.get_preorder_label() == 'out_stock'">
+                    <u><i><b style="color:red">Out of stock</b></i></u>
+                </t>
+            </div>
+        </xpath>
         <xpath expr="//a[@id='add_to_cart']" position="replace">
+            
             <a data-animation-selector=".o_wsale_product_images" role="button" id="add_to_cart" class="btn btn-primary btn-lg js_check_product a-submit my-1 mr-1 px-5 font-weight-bold flex-grow-1 d-none" href="#"><i class="fa fa-shopping-cart mr-2"/>Add to cart</a>
             <a role="button" id="preorder_to_cart" class="btn btn-primary btn-md mt-2 ml8 add_cart_preorder d-none" href="#" data-toggle="popover" data-placement="top"><i class="fa fa-shopping-cart"/> Pre Order</a>
             <a role="button" id="add_to_cart_custom" class="btn btn-primary btn-md add_to_cart_custom mt-2 px-3 ml8 font-weight-bold flex-grow-1 d-none" href="#" data-toggle="popover" data-placement="top"><i class="fa fa-shopping-cart mr-2"/>Add to cart</a>

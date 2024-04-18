@@ -11,7 +11,7 @@
        E-commerce shop customization
     """,
     'author': 'Nishi',
-    'depends' : ['website','website_sale','sale','stock','sale_management'],
+    'depends' : ['web','website','website_sale','sale','stock','sale_management','website_sale_comparison'],
     'data': [
         'security/ir.model.access.csv',
         'data/ircron.xml',
@@ -21,7 +21,6 @@
         'views/product_product_inherit.xml',
         'views/product_attribute_views.xml',
         'templates/website_sale_comparision_template.xml',
-        'templates/assets.xml',
         'templates/website_sale.xml',
         'templates/portal_inherit_views.xml',
             ],
@@ -31,6 +30,7 @@
     'assets':{
         'web.assets_frontend':[
             'ecommerce_customization/static/src/js/website_preorder.js',
+            'ecommerce_customization/static/src/scss/website_preorder.scss',
         ],
     },
 }

@@ -178,5 +178,6 @@ class ProductTemplate(models.Model):
                 self.allowed_preorder = "in_stock"
                 return "in_stock"
             elif (self.qty_available <= 0):
+                print("====================", self.qty_available)
                 self.allowed_preorder = "out_stock"
                 return "out_stock"
